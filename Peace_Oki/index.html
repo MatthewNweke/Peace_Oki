@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Dear Peace</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables */
+    :root {
+      --primary-color: #d6336c;
+      --light-pink: #ffe3e3;
+      --soft-white: #ffffffcc;
+      --text-color: #333;
+      --button-gradient: linear-gradient(45deg, #ff7eb3, #ff758c);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--light-pink), #fff3f0);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: var(--soft-white);
+      max-width: 600px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.5s ease;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    .image-section {
+      margin: 20px 0;
+    }
+    .image-section img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 50%;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease, filter 0.4s ease;
+      cursor: pointer;
+    }
+    .image-section img:hover {
+      transform: scale(1.1) rotate(-2deg);
+      filter: brightness(1.1);
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+    .highlight {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--button-gradient);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(214,51,108,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(214,51,108,0.4);
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    /* Heart animation */
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+    }
+    .heart-particle {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--primary-color);
+      transform: rotate(45deg);
+      top: 50%; left: 50%;
+      pointer-events: none;
+    }
+    .heart-particle::before,
+    .heart-particle::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--primary-color);
+      border-radius: 50%;
+    }
+    .heart-particle::before { top: -8px; left: 0; }
+    .heart-particle::after { left: 8px; top: 0; }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <h1>To The Love Of My Life</h1>
+    <div class="image-section">
+      <img id="photo" src="../Peace_img.jpg" alt="Her Beautiful Face" />
+    </div>
+    <p>Dear <span class="highlight">Peace</span>,</p>
+    <p>Being by your side these past months has been the most <span class="highlight">Incredible</span> adventure of my life. Every glance you give sends a spark through my <span class="highlight">heart</span>, and when you laugh, it feels like the world’s sweetest <span class="highlight">melody</span>.</p>
+    <p>More than <span class="highlight">gorgeous</span>, you are <span class="highlight">compassionate</span>, <span class="highlight">brilliantly witty</span>, and the most genuine soul I’ve ever known. My love for you grows stronger with each passing day.</p>
+    <p>So here I stand, endlessly grateful that you are <span class="highlight">mine</span>, hoping you feel the depth of my love. You turn ordinary moments into <span class="highlight">unforgettable memories</span> 🌟</p>
+    <button class="button" id="magicBtn">Click for Magic ✨</button>
+    <div class="footer">With all my love,<br />Your baby boo</div>
+  </div>
+  <script>
+    const container = document.getElementById('container');
+    const btn = document.getElementById('magicBtn');
+    
+    // Function to spawn hearts
+    function spawnHearts(x, y) {
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart-particle');
+        heart.style.left = x + (Math.random() - 0.5) * 100 + 'px';
+        heart.style.top = y + (Math.random() - 0.5) * 100 + 'px';
+        const duration = 2000 + Math.random() * 1000;
+        heart.style.animation = `floatUp ${duration}ms ease-out forwards`;
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), duration);
+      }
+    }
+    
+    // Click event
+    btn.addEventListener('click', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = rect.width / 2;
+      const y = rect.height / 2;
+      spawnHearts(x, y);
+      // Flash background
+      container.style.background = 'linear-gradient(135deg, #ffe3fc, #f0f0ff)';
+      setTimeout(() => {
+        container.style.background = '';
+      }, 800);
+    });
+    // Also trigger on image click
+    document.getElementById('photo').addEventListener('click', (e) => {
+      const bounds = e.target.getBoundingClientRect();
+      const x = bounds.left + bounds.width / 2 - container.getBoundingClientRect().left;
+      const y = bounds.top + bounds.height / 2 - container.getBoundingClientRect().top;
+      spawnHearts(x, y);
+    });
+  </script>
+</body>
+</html>
